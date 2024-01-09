@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Dataset_assembly_and_documentation_for_PK_and_PKPD_analysis.knit</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+<div id="pkpd-dataset-assembly-with-the-apmx-library" class="section level1">
+<h1>PK(PD) dataset assembly with the apmx library</h1>
+<div id="prepare-workspace-and-load-data" class="section level2">
+<h2>Prepare workspace and load data</h2>
+<p>This package contains randomly-generated source data for
+instructional purposes.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(apmx)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>EX <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(EX)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>PC <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(PC)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>DM <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(DM)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>LB <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(LB)</span></code></pre></div>
+</div>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>Clinical trial data is not collected in a way that automatically
+suits population pharmacometric work. Trial data is organized in a
+collection of datasets, one dataset per data type. These datasets are
+often called “domains”.</p>
+<p>The FDA and other regulatory agencies require domains be formatted
+per CDISC standards for submission. There are two main types of CDISC
+datasets:</p>
+<ul>
+<li>SDTM: study data tabulation model (a simple, organized, line-listing
+of each data point) <a href="https://www.cdisc.org/standards/foundational/sdtm" class="uri">https://www.cdisc.org/standards/foundational/sdtm</a><br />
+</li>
+<li>ADaM: analysis data model (datasets with derived values for analysis
+purposes) <a href="https://www.cdisc.org/standards/foundational/adam" class="uri">https://www.cdisc.org/standards/foundational/adam</a></li>
+</ul>
+<p>Here are some examples of common CDISC SDTM domains (as they relate
+to pharmacometrics):</p>
+<ul>
+<li><code>ex</code>: exposure (data about administered and planned
+doses)</li>
+<li><code>pc</code>: pharmacokinetics (data about pharmacokinetic
+samples)</li>
+<li><code>dm</code>: demographics (general metadata about the
+subject)</li>
+<li><code>lb</code>: laboratory (chemistry, hematology, lipid, and other
+lab panel results)</li>
+<li><code>vs</code>: vital signs (height, weight, BMI, and other
+clinical tests)</li>
+<li><code>cm</code>: conconmitant medications (additional medications
+taken prior to, during, and/or after treatment)</li>
+<li><code>ae</code>: adverse events (any untoward medical event that
+occurs after signing informed consent while on trial)</li>
+<li><code>eg</code>: EKG (ECG) readings</li>
+<li><code>tr</code>: tumor response (RECIST 1.1 or other tumor
+measurements)</li>
+<li><code>rs</code>: response (other response measurements, such as OS,
+PFS, etc.)</li>
+</ul>
+<p>There are many other types of SDTM domains. Technically, there are an
+infinite number of domains since you can create your own custom
+domains.</p>
+<p>For every SDTM domain, there is usually an ADaM equivalent. All ADaM
+domains start with ad__, followed by the domain name:</p>
+<ul>
+<li><code>adex</code>: ADaM version of ex</li>
+</ul>
+<p>There are some ADaM domains that are specific to the ADaM:</p>
+<ul>
+<li><code>adsl</code>: subject-level (a compilation of many important
+variables, one row per subject)</li>
+</ul>
+<p>Even though this data is well organized, there is no CDISC format for
+use in NONMEM or other population pharmacometric softwares. That is why
+we have built an R package, apmx, to provide tools to help build
+population PK(PD) datasets.</p>
+<p>This training will walk you through the R package and help you learn
+about pharmacometric data. The data loaded above are randomly-generated
+SDTM-like datasets to support training. They are based on a simple study
+design:</p>
+<ul>
+<li>IP: ABC999, oral tablet formulation</li>
+<li>Study drug administered twice, on D1 and D15</li>
+<li>Serial PK samples collected following both doses</li>
+<li>Additional domains DM and LB are also provided</li>
+</ul>
+<p>Currently, the package is limited to PK and PKPD datasets for
+analysis in NONMEM only. Additional tools for PK(PD) datasets, plus
+tools for other analysis types (TTE, logistic regression, QTC analysis)
+are under development and not available at this time. Datasets for
+analysis with other softwares, such as Monolix, are also unavailable at
+this time.</p>
+</div>
+<div id="dose-event-preparation" class="section level2">
+<h2>Dose event preparation</h2>
+<p>PK dataset assembly starts with preparing dose events. Dose events
+require several columns for assembly. Below are the apmx standard names,
+along with the typical SDTM name equivalent when applicable. Other
+variables, like <code>DUR</code> (infusion duration), may be required
+based on the analysis.</p>
+<ul>
+<li><code>USUBJID</code>: subject ID [character]</li>
+<li><code>DTIM</code> (EXSTDTC): date-time of dose administration
+[character]</li>
+<li><code>VISIT</code>: character visit label [character]</li>
+<li><code>NDAY</code> (EXSTDY): study day [numeric]</li>
+<li><code>TPTC</code> (EXTPT): dose timepoint label [character]</li>
+<li><code>TPT</code> (EXTPTNUM): dose timepoint [numeric]</li>
+<li><code>CMT</code>: assigned compartment for dose events
+[numeric]</li>
+<li><code>AMT</code> (EXDOSE): amount of drug administered
+[numeric]</li>
+<li><code>DVID</code> (EXTRT): dose event label [character]</li>
+<li><code>ROUTE</code> (EXROUTE): route of administration
+[character]</li>
+<li><code>FRQ</code> (EXDOSFRQ): dose frequency [character]</li>
+<li><code>DVIDU</code> (EXDOSU): dose units [character]</li>
+</ul>
+<p>The analyst must confirm the ex domain contains all of this
+information for the package to work. This dataset contains all of the
+information we need except the compartment. <code>CMT</code> must always
+be programmed by the user based on the model design. In this case,
+<code>CMT = 1</code> for the dose depot. We will also select only the
+columns that we need for the analysis, dropping the others.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ex <span class="ot">&lt;-</span> EX <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CMT =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(USUBJID, STUDYID, EXSTDTC, VISIT, EXSTDY, EXTPTNUM, EXDOSE,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                CMT, EXTRT, EXTPT, EXROUTE, EXDOSFRQ, EXDOSU)</span></code></pre></div>
+<p>That’s all we have to do to prepare the dose events for assembly.</p>
+</div>
+<div id="pk-observation-event-preparation" class="section level2">
+<h2>PK observation event preparation</h2>
+<p>Now, we are going to prepare the PK observations. Observation events
+require several columns for assembly:</p>
+<ul>
+<li><code>USUBJID</code>: subject ID [character]</li>
+<li><code>DTIM</code> (PCDTC): date-time of observation [character]</li>
+<li><code>VISIT</code>: character visit label [character]</li>
+<li><code>NDAY</code>: study day [numeric]</li>
+<li><code>TPTC</code> (PCTPT): observation timepoint label
+[character]</li>
+<li><code>TPT</code>: observation timepoint [numeric]</li>
+<li><code>CMT</code>: assigned compartment for observation events
+[numeric]</li>
+<li><code>ODV</code> (PCSTRESN): observation value in original units
+[numeric]</li>
+<li><code>LLOQ</code> (PCLLOQ): observation lower limit of
+quantification [numeric]</li>
+<li><code>DVID</code> (PCTEST): observation label [character]</li>
+<li><code>DVIDU</code> (PCTESTU): observation units [character]</li>
+</ul>
+<p>The PC domain may have multiple DVIDs and CMTs, perhaps for multiple
+analytes. Once again, we need to confirm our dataset has all of this
+information. Are any variables missing?</p>
+<ul>
+<li><code>CMT = 2</code> for central compartment</li>
+<li>There is no numeric timepoint (TPT)</li>
+<li>We will have to calculate both ourselves</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pc <span class="ot">&lt;-</span> PC <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(PCSTAT<span class="sc">==</span><span class="st">&quot;Y&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">CMT =</span> <span class="dv">2</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">TPT =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(PCTPT<span class="sc">==</span><span class="st">&quot;&lt;1 hour Pre-dose&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                                       PCTPT<span class="sc">==</span><span class="st">&quot;30 minutes post-dose&quot;</span> <span class="sc">~</span> <span class="fl">0.5</span><span class="sc">/</span><span class="dv">24</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                       PCTPT<span class="sc">==</span><span class="st">&quot;1 hour post-dose&quot;</span> <span class="sc">~</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">24</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                                       PCTPT<span class="sc">==</span><span class="st">&quot;2 hours post-dose&quot;</span> <span class="sc">~</span> <span class="dv">2</span><span class="sc">/</span><span class="dv">24</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>                                       PCTPT<span class="sc">==</span><span class="st">&quot;4 hours post-dose&quot;</span> <span class="sc">~</span> <span class="dv">4</span><span class="sc">/</span><span class="dv">24</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>                                       PCTPT<span class="sc">==</span><span class="st">&quot;6 hours post-dose&quot;</span> <span class="sc">~</span> <span class="dv">6</span><span class="sc">/</span><span class="dv">24</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>                                       PCTPT<span class="sc">==</span><span class="st">&quot;8 hours post-dose&quot;</span> <span class="sc">~</span> <span class="dv">8</span><span class="sc">/</span><span class="dv">24</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>                                       PCTPT<span class="sc">==</span><span class="st">&quot;12 hours post-dose&quot;</span> <span class="sc">~</span> <span class="dv">12</span><span class="sc">/</span><span class="dv">24</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>                                       PCTPT<span class="sc">==</span><span class="st">&quot;24 hours post-dose&quot;</span> <span class="sc">~</span> <span class="dv">24</span><span class="sc">/</span><span class="dv">24</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>                                       PCTPT<span class="sc">==</span><span class="st">&quot;48 hours post-dose&quot;</span> <span class="sc">~</span> <span class="dv">48</span><span class="sc">/</span><span class="dv">24</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(USUBJID, PCDTC, PCDY, VISIT, TPT, PCSTRESN,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>                PCLLOQ, CMT, PCTEST, PCTPT, PCSTRESU)</span></code></pre></div>
+<p>That’s all we have to do to prepare the observation events for
+assembly.</p>
+</div>
+<div id="simple-dataset-assembly" class="section level2">
+<h2>Simple dataset assembly</h2>
+<p>We have all of the information we need to build a simple PK dataset.
+Building a dataset is easy to do with <code>apmx</code>. Just feed the
+ex and pc domains into <code>apmx::pk_build()</code>!</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_simple <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(<span class="at">ex =</span> ex, <span class="at">pc =</span> pc)</span></code></pre></div>
+<p>This function does a lot! Let’s break down the new variables:</p>
+<ul>
+<li><code>C</code>: this flag comments out problematic records flagged
+by PDOSEF, TIMEF, AMTF, or DUPF</li>
+<li><code>NSTUDY</code>: numeric version of <code>STUDYID</code></li>
+<li><code>SUBJID</code>: numeric version of <code>USUBJID</code></li>
+<li><code>ID</code>: numeric version of <code>USUBJID</code> (counting
+from 1)</li>
+<li><code>ATFD</code>: actual time since first dose</li>
+<li><code>ATLD</code>: actual time since last dose</li>
+<li><code>NTFD</code>: nominal time since first dose</li>
+<li><code>NTLC</code>: nominal time since last cycle</li>
+<li><code>NTLD</code>: nominal time since last dose</li>
+<li><code>EVID</code>: event ID (NONMEM-required)</li>
+<li><code>MDV</code>: missing dependent variable (NONMEM-required)</li>
+<li><code>DVID</code>: numeric version of <code>DVID</code></li>
+<li><code>LDV</code>: log-transformed <code>ODV</code></li>
+<li><code>BLQ</code>: below-limit of quantification flag</li>
+<li><code>DOSENUM</code>: dose number (counting from 1)</li>
+<li><code>DOSEA</code>: most recent administered dose amount</li>
+<li><code>NROUTE</code>: numeric version of <code>ROUTE</code></li>
+<li><code>NFRQ</code>: numeric version of <code>FR</code>Q</li>
+<li><code>PDOSEF</code>: flag for records that occur prior to the first
+dose</li>
+<li><code>TIMEF</code>: flag for records where
+<code>ATFD = NA</code></li>
+<li><code>AMTF</code>: flag for dose events where
+<code>AMT = NA</code></li>
+<li><code>DUPF</code>: flag for duplicated records (same
+<code>USUBJID</code>, <code>ATFD</code>, <code>EVID</code>, and
+<code>CMT</code>)</li>
+<li><code>NOEXF</code>: flag for subjects with no dose events</li>
+<li><code>NODV1F</code>: flag for subjects with no observations where
+<code>DVID = 1</code></li>
+<li><code>SDF</code>: flag for single-dose subjects</li>
+<li><code>PLBOF</code>: flag for placebo records</li>
+<li><code>SPARSEF</code>: flag for records associating with sparse
+sampling</li>
+<li><code>TREXF</code>: flag for dose records occurring after the last
+observation</li>
+<li><code>IMPEX</code>: flag for records impacted by a dose event with
+imputed time</li>
+<li><code>IMPDV</code>: flag for an observation record with an imputed
+time</li>
+<li><code>LINE</code>: dataset row number</li>
+<li><code>NSTUDYC</code>: character version of <code>STUDYID</code></li>
+<li><code>DOMAIN</code>: original domain of event</li>
+<li><code>DVIDC</code>: character version of <code>DVID</code></li>
+<li><code>TIMEU</code>: time units of time variables</li>
+<li><code>NROUTEC</code>: character version of <code>ROUTE</code></li>
+<li><code>NFRQC</code>: character version of <code>FRQ</code></li>
+<li><code>FDOSE</code>: date-time of first dose</li>
+<li><code>VERSN</code>: <code>apmx</code> package version</li>
+<li><code>BUILD</code>: date of dataset creation</li>
+</ul>
+<p><code>pk_build()</code> has optional parameters that can customize
+the output dataset. Here are all of the options that will affect a
+simple dataset. Here they are presented in their default state:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_simple <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(<span class="at">ex =</span> ex, <span class="co">#dataframe of prepared dose events</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">pc =</span> pc, <span class="co">#dataframe of prepared pc observation events</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                            <span class="at">time.units =</span> <span class="st">&quot;days&quot;</span>, <span class="co">#can be set to days or hours.</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                            <span class="co">#NOTE: units of TPT in ex and pc should match this unit</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">cycle.length =</span> <span class="cn">NA</span>, <span class="co">#must be in units of days, will reset NTLC to 0</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                            <span class="at">na =</span> <span class="sc">-</span><span class="dv">999</span>, <span class="co">#replaces missing nominal times and covariates with a numeric value</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>                            <span class="at">time.rnd =</span> <span class="cn">NULL</span>, <span class="co">#rounds all time values to x decimal places</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>                            <span class="at">amt.rnd =</span> <span class="cn">NULL</span>, <span class="co">#rounds calculated dose values to x decimal places</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">dv.rnd =</span> <span class="cn">NULL</span>, <span class="co">#rounds observation columns to x decimal places</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                            <span class="at">impute =</span> <span class="cn">NA</span>, <span class="co">#imputation method for missing times</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                            <span class="at">sparse =</span> <span class="dv">3</span>) <span class="co">#threshold for calculating sparse/serial distinctions</span></span></code></pre></div>
+<p>I recommend setting <code>time.rnd = 3</code> to make the dataset
+easier to read.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df_simple <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, <span class="at">time.rnd =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p>Sometimes, you will want a more complicated dataset. Let’s explore
+additional functionalities of <code>pk_build()</code>.</p>
+</div>
+<div id="covariate-preparation" class="section level2">
+<h2>Covariate preparation</h2>
+<p>For the most part, all covariates can be divided into four
+categories:</p>
+<ul>
+<li>Subject-level, categorical covariates</li>
+<li>Subject-level, continuous covariates</li>
+<li>Time-varying, categorical covariates</li>
+<li>Time-varying, continuous covariates</li>
+</ul>
+<p><code>apmx</code> has a few requirements to help keep track of
+different kinds of covariates. When you program covariates, you have to
+follow these rules:</p>
+<ul>
+<li>Categorical covariates must be programmed as character-type.</li>
+<li>Continuous covariates must be programmed as numeric-type.</li>
+<li>Continuous covariates also require a unit variable
+(character-type).</li>
+</ul>
+<p>Let’s start by preparing some subject-level covariates from
+<code>dm</code> and <code>lb.</code> All subject-level covariate data
+frames require a USUBJID column. There must only be one row per subject.
+Covariate names should be clear and easy to interpret.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dm <span class="ot">&lt;-</span> DM <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(USUBJID, AGE, SEX, RACE, ETHNIC) <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AGEU =</span> <span class="st">&quot;years&quot;</span>) <span class="co">#AGE is continuous and requires a unit</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lb <span class="ot">&lt;-</span> LB <span class="sc">%&gt;%</span> <span class="co">#select the desired labs</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBCOMPFL<span class="sc">==</span><span class="st">&quot;Y&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBVST <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;Baseline (D1)&quot;</span>, <span class="st">&quot;Screening&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBPARAMCD <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;ALB&quot;</span>, <span class="st">&quot;AST&quot;</span>, <span class="st">&quot;ALT&quot;</span>, <span class="st">&quot;BILI&quot;</span>, <span class="st">&quot;CREAT&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">LBORRES =</span> <span class="fu">as.numeric</span>(LBORRES))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>lb <span class="ot">&lt;-</span> lb <span class="sc">%&gt;%</span> <span class="co">#select the lab collected immediately prior to first dose</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(USUBJID, LBPARAMCD, LBDT) <span class="sc">%&gt;%</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(USUBJID, LBPARAMCD) <span class="sc">%&gt;%</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="fu">row_number</span>()<span class="sc">==</span><span class="fu">max</span>(<span class="fu">row_number</span>())) <span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>lb <span class="ot">&lt;-</span> lb <span class="sc">%&gt;%</span> <span class="co">#finish formatting and add units since all labs are continuous</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(USUBJID, LBPARAMCD, LBORRES) <span class="sc">%&gt;%</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">&quot;LBPARAMCD&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;LBORRES&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ALBU =</span> <span class="st">&quot;g/dL&quot;</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">ASTU =</span> <span class="st">&quot;IU/L&quot;</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">ALTU =</span> <span class="st">&quot;IU/L&quot;</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>                <span class="at">BILIU =</span> <span class="st">&quot;mg/dL&quot;</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>                <span class="at">CREATU =</span> <span class="st">&quot;mg/dL&quot;</span>)</span></code></pre></div>
+<p>Next, let’s prepare some time-varying covariates from
+<code>lb</code>. All time-varying covariate data frames require a
+<code>USUBJID</code> and <code>DTIM</code> column.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tast <span class="ot">&lt;-</span> LB <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBCOMPFL<span class="sc">==</span><span class="st">&quot;Y&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBPARAMCD<span class="sc">==</span><span class="st">&quot;AST&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">LBORRES =</span> <span class="fu">as.numeric</span>(LBORRES)) <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(USUBJID, <span class="at">DTIM =</span> LBDT, <span class="at">AST =</span> LBORRES) <span class="sc">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ASTU =</span> <span class="st">&quot;IU/L&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>talt <span class="ot">&lt;-</span> LB <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBCOMPFL<span class="sc">==</span><span class="st">&quot;Y&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBPARAMCD<span class="sc">==</span><span class="st">&quot;ALT&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">LBORRES =</span> <span class="fu">as.numeric</span>(LBORRES)) <span class="sc">%&gt;%</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(USUBJID, <span class="at">DTIM =</span> LBDT, <span class="at">ALT =</span> LBORRES) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">ALTU =</span> <span class="st">&quot;IU/L&quot;</span>)</span></code></pre></div>
+</div>
+<div id="pd-observation-preparation" class="section level2">
+<h2>PD observation preparation</h2>
+<p>You may want to add PD observations to your dataset. PD observations
+have the same requirements as pc observations. Unfortunately,
+<code>apmx</code> does not recognize SDTM/ADaM language for PD
+observations. That is because there are many types of pd events, with
+many types of possible formats. You must convert all column names to
+<code>apmx</code> column names.</p>
+<p>For this analysis, we will pretend glucose observations from
+<code>lb</code> are a meaningful biomarker. Let’s set
+<code>CMT = 3</code> for the PD compartment.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>pd <span class="ot">&lt;-</span> LB <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBCOMPFL<span class="sc">==</span><span class="st">&quot;Y&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBPARAM<span class="sc">==</span><span class="st">&quot;glucose&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">DTIM =</span> <span class="fu">paste</span>(LBDT, <span class="st">&quot;00:00&quot;</span>),</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">VISIT =</span> LBVST,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">NDAY =</span> <span class="fu">case_when</span>(VISIT<span class="sc">==</span><span class="st">&quot;Screening&quot;</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">15</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                                 VISIT<span class="sc">==</span><span class="st">&quot;Baseline (D1)&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>                                 VISIT<span class="sc">==</span><span class="st">&quot;Visit 2 (D8)&quot;</span> <span class="sc">~</span> <span class="dv">8</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>                                 VISIT<span class="sc">==</span><span class="st">&quot;Visit 3 (D15)&quot;</span> <span class="sc">~</span> <span class="dv">15</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>                                 VISIT<span class="sc">==</span><span class="st">&quot;Visit 4 (D29)&quot;</span> <span class="sc">~</span> <span class="dv">29</span>,</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>                                 VISIT<span class="sc">==</span><span class="st">&quot;End of Treatment&quot;</span> <span class="sc">~</span> <span class="dv">45</span>),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">TPT =</span> <span class="dv">0</span>,</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">TPTC =</span> LBTPT,</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">ODV =</span> <span class="fu">as.numeric</span>(LBORRES),</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>                <span class="at">DVIDU =</span> LBORRESU,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>                <span class="at">LLOQ =</span> <span class="cn">NA</span>,</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>                <span class="at">CMT =</span> <span class="dv">3</span>,</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>                <span class="at">DVID =</span> LBPARAM) <span class="sc">%&gt;%</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(USUBJID, DTIM, NDAY, VISIT, TPT,</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>                ODV, LLOQ, CMT, DVID, TPTC, DVIDU)</span></code></pre></div>
+</div>
+<div id="full-dataset-assembly" class="section level2">
+<h2>Full dataset assembly</h2>
+<p>Let’s add all of the new events and covariates to the dataset.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df_full <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(<span class="at">ex =</span> ex, <span class="at">pc =</span> pc, <span class="at">pd =</span> pd,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sl.cov =</span> <span class="fu">list</span>(dm, lb),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">tv.cov =</span> <span class="fu">list</span>(tast, talt),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">time.rnd =</span> <span class="dv">3</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex = ex, pc = pc, pd = pd, sl.cov = list(dm, lb), :</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following USUBJID(s) have at least one event with missing ATFD:</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ABC102-01-005</span></span></code></pre></div>
+<p>First, you’ll notice a warning was issued in the console. We will
+re-visit the warnings later in this document. Instead, let’s focus on
+the dataset itself.</p>
+<p>There is a new type of row where <code>EVID = 2</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_simple<span class="sc">$</span>EVID)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0 1</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_full<span class="sc">$</span>EVID)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2 0 1</span></span></code></pre></div>
+<p>These rows capture the date-time and values of time-varying
+covariates. Sometimes, we want to retain the exact date-time of each
+time-varying covariate.</p>
+<p>The <code>DVID</code> column changed since the last visit.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_simple<span class="sc">$</span>DVID)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1]  1 NA</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_full<span class="sc">$</span>DVID)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] NA  2  1</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_simple<span class="sc">$</span>DVIDC)</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;ABC999&quot;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_full<span class="sc">$</span>DVIDC)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] NA        &quot;glucose&quot; &quot;ABC999&quot;</span></span></code></pre></div>
+<p>There are now two observation events, ABC999 and glucose. The
+<code>NA</code> rows are for dose and other events.</p>
+<p>You’ll notice that all of the covariate names changed a bit. They all
+received a prefix, and some received a suffix. Why do we do this?
+Prefixes and suffixes can identify the type of covariate:</p>
+<ul>
+<li>Prefix N: categorical, subject-level</li>
+<li>Prefix B: continuous, subject-level (baseline)</li>
+<li>Prefix T: categorical or continuous, time-varying</li>
+<li>Suffix C: character-type for categorical variables</li>
+<li>Suffix U: units for continuous variables</li>
+</ul>
+<p>If you can’t remember the prefixes and suffixes, that’s OK! We have
+an additional function to help with that. <code>apmx::cov_find()</code>
+will return all covariates of particular types in a PK dataset.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">cov_find</span>(df_full, <span class="at">cov =</span> <span class="st">&quot;categorical&quot;</span>, <span class="at">type =</span> <span class="st">&quot;numeric&quot;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;NSTUDY&quot;  &quot;NROUTE&quot;  &quot;NFRQ&quot;    &quot;NSEX&quot;    &quot;NRACE&quot;   &quot;NETHNIC&quot;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">cov_find</span>(df_full, <span class="at">cov =</span> <span class="st">&quot;categorical&quot;</span>, <span class="at">type =</span> <span class="st">&quot;character&quot;</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;NSTUDYC&quot;  &quot;NROUTEC&quot;  &quot;NFRQC&quot;    &quot;NSEXC&quot;    &quot;NRACEC&quot;   &quot;NETHNICC&quot;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">cov_find</span>(df_full, <span class="at">cov =</span> <span class="st">&quot;continuous&quot;</span>, <span class="at">type =</span> <span class="st">&quot;numeric&quot;</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;BAGE&quot;   &quot;BALB&quot;   &quot;BALT&quot;   &quot;BAST&quot;   &quot;BBILI&quot;  &quot;BCREAT&quot; &quot;TAST&quot;   &quot;TALT&quot;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">cov_find</span>(df_full, <span class="at">cov =</span> <span class="st">&quot;units&quot;</span>, <span class="at">type =</span> <span class="st">&quot;character&quot;</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;BAGEU&quot;   &quot;BALBU&quot;   &quot;BALTU&quot;   &quot;BASTU&quot;   &quot;BBILIU&quot;  &quot;BCREATU&quot; &quot;TASTU&quot;  </span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [8] &quot;TALTU&quot;</span></span></code></pre></div>
+<p>Let’s explore the rest of the optional parameters in
+<code>pk_build()</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_full <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(<span class="at">ex =</span> ex, <span class="at">pc =</span> pc, <span class="at">pd =</span> pd,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sl.cov =</span> <span class="fu">list</span>(dm, lb),</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">tv.cov =</span> <span class="fu">list</span>(tast, talt),</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">time.rnd =</span> <span class="dv">3</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">cov.rnd =</span> <span class="cn">NULL</span>, <span class="co">#rounds observation columns to x decimal places</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">BDV =</span> <span class="cn">FALSE</span>, <span class="co">#calculates baseline dependent variable for PD events</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                          <span class="at">DDV =</span> <span class="cn">FALSE</span>, <span class="co">#calculates change (delta) from baseline for PD events</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">PDV =</span> <span class="cn">FALSE</span>, <span class="co">#calculates percent change from baseline for PD events</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">demo.map =</span> <span class="cn">TRUE</span>, <span class="co">#adds specific numeric mapping for SEX, RACE, and ETHNIC variables</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>                          <span class="at">tv.cov.fill =</span> <span class="st">&quot;downup&quot;</span>, <span class="co">#fill pattern for time-varying covariates</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                          <span class="at">keep.other =</span> <span class="cn">TRUE</span>) <span class="co">#keep or drop all EVID = 2 rows</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex = ex, pc = pc, pd = pd, sl.cov = list(dm, lb), :</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following USUBJID(s) have at least one event with missing ATFD:</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ABC102-01-005</span></span></code></pre></div>
+<p>The dataset is a bit easier to read if we drop the other events. We
+will do that moving forward for the rest of the tutorial.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_full <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(<span class="at">ex =</span> ex, <span class="at">pc =</span> pc, <span class="at">pd =</span> pd,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">sl.cov =</span> <span class="fu">list</span>(dm, lb),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">tv.cov =</span> <span class="fu">list</span>(tast, talt),</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">time.rnd =</span> <span class="dv">3</span>, <span class="at">dv.rnd =</span> <span class="dv">3</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">BDV =</span> <span class="cn">TRUE</span>, <span class="at">DDV =</span> <span class="cn">TRUE</span>, <span class="at">PDV =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                          <span class="at">keep.other =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex = ex, pc = pc, pd = pd, sl.cov = list(dm, lb), :</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; The following USUBJID(s) have at least one event with missing ATFD:</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ABC102-01-005</span></span></code></pre></div>
+</div>
+<div id="other-covariate-methods" class="section level2">
+<h2>Other covariate methods</h2>
+<p>Time-varying covariates can be challenging to work with. The
+<code>pk_build()</code> function can only fill them by date-time. What
+if date-time is not available in the source data?</p>
+<p>The <code>apmx::cov_apply()</code> function will add covariates to a
+dataset built by <code>pk_build()</code>. It will add time-varying
+covariates by any time variable, including:</p>
+<ul>
+<li><code>DTIM</code></li>
+<li><code>ATFD</code></li>
+<li><code>ATLD</code></li>
+<li><code>NTFD</code></li>
+<li><code>NTLC</code></li>
+<li><code>NTLD</code></li>
+<li><code>NDAY</code></li>
+</ul>
+<p>Let’s add TAST (time-varying AST) by nominal time instead of actual
+time.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>tast <span class="ot">&lt;-</span> LB <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBCOMPFL<span class="sc">==</span><span class="st">&quot;Y&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(LBPARAMCD<span class="sc">==</span><span class="st">&quot;AST&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">NTFD =</span> <span class="fu">case_when</span>(LBVST<span class="sc">==</span><span class="st">&quot;Screening&quot;</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">15</span>, <span class="co">#calculate NTFD from visit code</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                                 LBVST<span class="sc">==</span><span class="st">&quot;Baseline (D1)&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                                 LBVST<span class="sc">==</span><span class="st">&quot;Visit 2 (D8)&quot;</span> <span class="sc">~</span> <span class="dv">8</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                                 LBVST<span class="sc">==</span><span class="st">&quot;Visit 3 (D15)&quot;</span> <span class="sc">~</span> <span class="dv">15</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                                 LBVST<span class="sc">==</span><span class="st">&quot;Visit 4 (D29)&quot;</span> <span class="sc">~</span> <span class="dv">29</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>                                 LBVST<span class="sc">==</span><span class="st">&quot;End of Treatment&quot;</span> <span class="sc">~</span> <span class="dv">45</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">AST =</span> <span class="fu">as.numeric</span>(LBORRES)) <span class="sc">%&gt;%</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(USUBJID, NTFD, AST, <span class="at">ASTU =</span> LBORRESU)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>df_cov_apply <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(<span class="at">ex =</span> ex, <span class="at">pc =</span> pc,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>                               <span class="at">sl.cov =</span> <span class="fu">list</span>(dm, lb),</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>                               <span class="at">time.rnd =</span> <span class="dv">3</span>, <span class="at">dv.rnd =</span> <span class="dv">3</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>                               <span class="at">BDV =</span> <span class="cn">TRUE</span>, <span class="at">DDV =</span> <span class="cn">TRUE</span>, <span class="at">PDV =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>                               <span class="at">keep.other =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(tast, <span class="at">time.by =</span> <span class="st">&quot;NTFD&quot;</span>)</span></code></pre></div>
+<p><code>cov_apply()</code> can also add subject-level covariates by any
+subject identifier.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df_cov_apply <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(<span class="at">ex =</span> ex, <span class="at">pc =</span> pc,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">time.rnd =</span> <span class="dv">3</span>, <span class="at">dv.rnd =</span> <span class="dv">3</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">BDV =</span> <span class="cn">TRUE</span>, <span class="at">DDV =</span> <span class="cn">TRUE</span>, <span class="at">PDV =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">keep.other =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(dm) <span class="sc">%&gt;%</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(lb) <span class="sc">%&gt;%</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(talt, <span class="at">time.by =</span> <span class="st">&quot;DTIM&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(tast, <span class="at">time.by =</span> <span class="st">&quot;NTFD&quot;</span>)</span></code></pre></div>
+<p><code>cov_apply()</code> can also add empirical bayes estimates or
+exposure metrics. Notice these also get their own prefixes.</p>
+<ul>
+<li>Prefix C: exposure metric</li>
+<li>Prefix I: empirical bayes estimate</li>
+</ul>
+<p><code>cov_apply()</code> cannot handle units for these parameters at
+this time.</p>
+<p>Let’s try adding exposure metrics and parameter estimates to the
+dataset. First, we will generate dummy exposures and parameter
+estimates.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>, <span class="co">#exposure metrics</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MAX =</span> <span class="dv">1001</span><span class="sc">:</span><span class="dv">1022</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">MIN =</span> <span class="dv">101</span><span class="sc">:</span><span class="dv">122</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">AVG =</span> <span class="dv">501</span><span class="sc">:</span><span class="dv">522</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>, <span class="co">#individual clearance and central volume estimates</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                         <span class="at">CL =</span> <span class="fu">seq</span>(<span class="fl">0.1</span>, <span class="fl">2.2</span>, <span class="fl">0.1</span>),</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>                         <span class="at">VC =</span> <span class="fu">seq</span>(<span class="dv">1</span>, <span class="fl">11.5</span>, <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df_cov_apply <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(<span class="at">ex =</span> ex, <span class="at">pc =</span> pc,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                               <span class="at">time.rnd =</span> <span class="dv">3</span>, <span class="at">dv.rnd =</span> <span class="dv">3</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                               <span class="at">BDV =</span> <span class="cn">TRUE</span>, <span class="at">DDV =</span> <span class="cn">TRUE</span>, <span class="at">PDV =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                               <span class="at">keep.other =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(dm) <span class="sc">%&gt;%</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(lb) <span class="sc">%&gt;%</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(talt, <span class="at">time.by =</span> <span class="st">&quot;DTIM&quot;</span>, <span class="at">keep.other =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(tast, <span class="at">time.by =</span> <span class="st">&quot;NTFD&quot;</span>, <span class="at">keep.other =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(exposure, <span class="at">id.by =</span> <span class="st">&quot;ID&quot;</span>, <span class="at">exp =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  apmx<span class="sc">::</span><span class="fu">cov_apply</span>(parameters, <span class="at">id.by =</span> <span class="st">&quot;ID&quot;</span>, <span class="at">ebe =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>It is recommended you always use <code>pk_build()</code> or
+<code>cov_apply()</code> to add covariates instead of adding them in
+yourself. That ensures <code>cov_find()</code> always finds the
+covariates correctly.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">cov_find</span>(df_cov_apply, <span class="at">cov =</span> <span class="st">&quot;categorical&quot;</span>, <span class="at">type =</span> <span class="st">&quot;numeric&quot;</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;NSTUDY&quot;  &quot;NROUTE&quot;  &quot;NFRQ&quot;    &quot;NSEX&quot;    &quot;NRACE&quot;   &quot;NETHNIC&quot;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">cov_find</span>(df_cov_apply, <span class="at">cov =</span> <span class="st">&quot;categorical&quot;</span>, <span class="at">type =</span> <span class="st">&quot;character&quot;</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;NSTUDYC&quot;  &quot;NROUTEC&quot;  &quot;NFRQC&quot;    &quot;NSEXC&quot;    &quot;NRACEC&quot;   &quot;NETHNICC&quot;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">cov_find</span>(df_cov_apply, <span class="at">cov =</span> <span class="st">&quot;continuous&quot;</span>, <span class="at">type =</span> <span class="st">&quot;numeric&quot;</span>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;BAGE&quot;   &quot;BALB&quot;   &quot;BALT&quot;   &quot;BAST&quot;   &quot;BBILI&quot;  &quot;BCREAT&quot; &quot;TALT&quot;   &quot;TAST&quot;</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">cov_find</span>(df_cov_apply, <span class="at">cov =</span> <span class="st">&quot;units&quot;</span>, <span class="at">type =</span> <span class="st">&quot;character&quot;</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;BAGEU&quot;   &quot;BALBU&quot;   &quot;BALTU&quot;   &quot;BASTU&quot;   &quot;BBILIU&quot;  &quot;BCREATU&quot; &quot;TALTU&quot;  </span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [8] &quot;TASTU&quot;</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">cov_find</span>(df_cov_apply, <span class="at">cov =</span> <span class="st">&quot;exposure&quot;</span>, <span class="at">type =</span> <span class="st">&quot;numeric&quot;</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;CMAX&quot; &quot;CMIN&quot; &quot;CAVG&quot;</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">cov_find</span>(df_cov_apply, <span class="at">cov =</span> <span class="st">&quot;empirical bayes estimate&quot;</span>, <span class="at">type =</span> <span class="st">&quot;numeric&quot;</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;ICL&quot; &quot;IVC&quot;</span></span></code></pre></div>
+</div>
+<div id="errors-and-warnings" class="section level2">
+<h2>Errors and warnings</h2>
+<p><code>pk_build()</code> and other apmx functions issue
+errors/warnings for problematic data. What is the warning we have been
+receiving this whole time? First, let’s filter our dataset to the one
+subject triggering the warning:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>warning <span class="ot">&lt;-</span> df_full <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(USUBJID<span class="sc">==</span><span class="st">&quot;ABC102-01-005&quot;</span>)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(warning)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>warning<span class="sc">$</span>DVIDC</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;glucose&quot;</span></span></code></pre></div>
+<p>This subject has 1 PD observation, no dose or PK observations.
+Because there is no dose, you cannot calculate <code>ATFD</code> (actual
+time since first dose). The warning informs you which subjects have this
+particular problem. This helps you diagnose potential problems with your
+data. Notice in this instance, the record is flagged by <code>C</code>
+and <code>TIMEF</code>.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>warning<span class="sc">$</span>C</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;C&quot;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>warning<span class="sc">$</span>TIMEF</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+<p>There are other errors and warnings to help you diagnose your data as
+well. There is a key difference between the two:</p>
+<ul>
+<li>Errors inform you the input data cannot be used to build a dataset.
+This will require you to review the data and re-format it.<br />
+</li>
+<li>Warnings inform you the data can be used to build a dataset, but
+there may be problems with it. You should review the data to determine
+why the warnings are occurring. You don’t need to make them all
+disappear for the dataset to work in NONMEM successfully.</li>
+</ul>
+<div id="errors" class="section level4">
+<h4>Errors</h4>
+<p>What if you are missing a required column in your input domain?</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ex_error <span class="ot">&lt;-</span> ex[, <span class="sc">-</span><span class="dv">5</span>]</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_error, pc)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex_error, pc): Column NDAY is missing from the ex dataset.</span></span></code></pre></div>
+<p>What if the variable types are incorrect?</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>ex_error <span class="ot">&lt;-</span> ex</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>ex_error<span class="sc">$</span>USUBJID <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">42</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_error, pc)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex_error, pc): Column USUBJID in ex is not character type.</span></span></code></pre></div>
+<p>What if a required value is missing?</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ex_error <span class="ot">&lt;-</span> ex</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ex_error<span class="sc">$</span>USUBJID[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_error, pc)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex_error, pc): USUBJID missing in ex for at least 1 row.</span></span></code></pre></div>
+<p>What if we program <code>ADDL</code> but not <code>II</code> for dose
+events?</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ex_error <span class="ot">&lt;-</span> ex</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>ex_error<span class="sc">$</span>ADDL <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_error, pc)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex_error, pc): If ex contains ADDL, it must contain II</span></span></code></pre></div>
+<p>What if date-time is not formatted correctly?</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ex_error <span class="ot">&lt;-</span> ex</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>ex_error<span class="sc">$</span>EXSTDTC <span class="ot">&lt;-</span> <span class="fu">substr</span>(ex_error<span class="sc">$</span>EXSTDTC, <span class="dv">1</span>, <span class="dv">10</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_error, pc)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex_error, pc): DTIM in ex is not ISO 8601 format.</span></span></code></pre></div>
+<p>What if the baseline nominal day <code>NDAY == 0</code> instead of
+1?</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>ex_error <span class="ot">&lt;-</span> ex</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>ex_error<span class="sc">$</span>EXSTDY <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_error, pc)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex_error, pc): NDAY in ex has a 0 measurement. Please confirm day of first dose is nominal day 1 and the day prior to first dose is nominal day -1.</span></span></code></pre></div>
+<p>Nominal days can be tricky. The day a patient takes their first dose
+is day 1. The day before their first dose is day -1. Therefore, there is
+no study day 0.</p>
+<p>What if <code>ADDL</code> and <code>II</code> are both present, but
+one of them is <code>NA</code>?</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>ex_error <span class="ot">&lt;-</span> ex</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>ex_error<span class="sc">$</span>ADDL <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>ex_error<span class="sc">$</span>II <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="dv">1</span>, <span class="dv">41</span>), <span class="cn">NA</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_error, pc)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex_error, pc): At least one row in ex has a documented ADDL when II is NA.</span></span></code></pre></div>
+<p>What if you only enter a dose domain?</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex): Please enter a pc or pd domain.</span></span></code></pre></div>
+<p>What if a pc observation is 0 or negative?</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pc_error <span class="ot">&lt;-</span> pc</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pc_error<span class="sc">$</span>PCSTRESN[<span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc_error)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex, pc_error): At least one dependent variable in PC is less than or equal to 0.</span></span></code></pre></div>
+<p>What if the study code is not included in <code>ex</code> or
+<code>sl.cov</code>? Note that you can pass the study code variable
+through <code>sl.cov</code> or <code>ex</code>.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>ex_error <span class="ot">&lt;-</span> ex <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>STUDYID)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_error, pc)</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex_error, pc): STUDY column must be included in ex or sl.cov.</span></span></code></pre></div>
+<p>What if you have multiple values for a subject-level covariate within
+one subject?</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>dm_error <span class="ot">&lt;-</span> dm</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>dm_error<span class="sc">$</span>USUBJID[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;ABC102-01-001&quot;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, <span class="at">sl.cov=</span>dm_error)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex, pc, sl.cov = dm_error): sl.cov has duplicate USUBJID rows.</span></span></code></pre></div>
+<p>What if you select a time unit not supported by
+<code>pk_build</code>?</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, <span class="at">time.units=</span><span class="st">&quot;minutes&quot;</span>)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex, pc, time.units = &quot;minutes&quot;): time.units parameter must be in days or hours.</span></span></code></pre></div>
+<p>What if you program <code>DDV</code> and/or <code>PDV</code> without
+calculating <code>BDV</code>?</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, pd, <span class="at">DDV=</span><span class="cn">TRUE</span>, PDV<span class="sc">==</span><span class="cn">TRUE</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex, pc, pd, DDV = TRUE, PDV == TRUE): object &#39;PDV&#39; not found</span></span></code></pre></div>
+<p>What if you pass the same covariate through multiple dataframes?</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>ex_error <span class="ot">&lt;-</span> ex</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>ex_error<span class="sc">$</span>NSEX <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_error, pc, <span class="at">sl.cov =</span> dm)</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex_error, pc, sl.cov = dm): NSEX column is duplicated in sl.cov and another dataset. Please include this column in one dataset only.</span></span></code></pre></div>
+<p>Note you are allowed to pass other columns through the ex, pc, and pd
+domains. For example, try adding the column <code>SEX</code> instead of
+<code>NSEX</code>. If you pass an extra column through ex, pc, or pd, it
+will not be impacted by the function.</p>
+<p>What if you provide a continuous covariate but forget to provide
+units?</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>dm_error <span class="ot">&lt;-</span> dm <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>AGEU)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, <span class="at">sl.cov =</span> dm_error)</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in apmx::pk_build(ex, pc, sl.cov = dm_error): All numerical covariates in sl.cov need units.</span></span></code></pre></div>
+</div>
+<div id="warnings" class="section level4">
+<h4>Warnings</h4>
+<p>These datasets will build, but <code>pk_build()</code> will inform
+you of potential problems. What if a subject has no covariates, but
+others do?</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>dm_warning <span class="ot">&lt;-</span> dm</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>dm_warning <span class="ot">&lt;-</span> dm_warning[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,]</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>df_warning <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, <span class="at">sl.cov=</span>dm_warning)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc, sl.cov = dm_warning): The following</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; USUBJID(s) have PKPD events but are not in sl.cov: ABC102-01-006,</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ABC102-02-001, ABC102-02-002, ABC102-02-003, ABC102-02-004, ABC102-03-001,</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ABC102-03-002, ABC102-03-003, ABC102-03-004, ABC102-04-001, ABC102-04-002,</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ABC102-04-003, ABC102-04-004, ABC102-04-005, ABC102-04-006, ABC102-04-007,</span></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ABC102-04-008</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>df_warning <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, <span class="at">sl.cov =</span> <span class="fu">list</span>(dm_warning, lb))</span></code></pre></div>
+<p>Notice the warning is only triggered if a subject has NO covariates.
+In the second case, all subjects are included in lb, while only some are
+in <code>dm</code>. The warning does not issue if the subject has at
+least 1 covariate. All missing covariate are filled with the missing
+parameter, default <code>-999</code>.</p>
+<p>What if a subject does not have any baseline PD events and
+<code>BDV|DDV|PDV == TRUE</code>? Notice the warning is only issued if
+<code>BDV</code>, <code>DDV</code>, or <code>PDV</code> are
+calculated.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pd_warning <span class="ot">&lt;-</span> pd</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>pd_warning <span class="ot">&lt;-</span> pd[<span class="dv">3</span><span class="sc">:</span><span class="fu">nrow</span>(pd_warning), ]</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>df_warning <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, pd_warning, <span class="at">BDV=</span><span class="cn">TRUE</span>)</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc, pd_warning, BDV = TRUE): The following</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; USUBJID(s) do not have a baseline glucose observation at or prior to first dose</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; (BDV, DDV, PDV not calculated): ABC102-01-001</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc, pd_warning, BDV = TRUE): The following</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; USUBJID(s) have at least one event with missing ATFD: ABC102-01-005</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>df_warning <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, pd_warning)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc, pd_warning): The following USUBJID(s) have at</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; least one event with missing ATFD: ABC102-01-005</span></span></code></pre></div>
+<p>What if the source data events occurred out of order? You’ll notice
+the <code>NTFD</code> of the first observation falls after the next
+event.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>pc_warning <span class="ot">&lt;-</span> pc</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>pc_warning<span class="sc">$</span>TPT[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fl">0.07</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>df_warning <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc_warning,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">time.rnd =</span> <span class="dv">3</span>)</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc_warning, time.rnd = 3): The following</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; USUBJID(s) have at least one event that occurred out of protocol order (NTFD is</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; not strictly increasing): ABC102-01-001</span></span></code></pre></div>
+<p>What if a dose event is missing <code>AMT</code>? The record is
+automatically C-flagged and a warning is issued. Note that the PK
+records for this subject are not C-flagged.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>ex_warning <span class="ot">&lt;-</span> ex</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>ex_warning<span class="sc">$</span>EXDOSE[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>df_warning <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_warning, pc,</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>                             <span class="at">time.rnd =</span> <span class="dv">3</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex_warning, pc, time.rnd = 3): The following</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; USUBJID(s) have at least one dose event with missing AMT: ABC102-01-001</span></span></code></pre></div>
+<p>What if there are two events that occur at the same time? Notice how
+the duplicated events are C-flagged and a warning is issued.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>pc_warning <span class="ot">&lt;-</span> pc</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>pc_warning[<span class="dv">2</span>, ] <span class="ot">&lt;-</span> pc_warning[<span class="dv">1</span>, ]</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>pc_warning<span class="sc">$</span>PCSTRESN[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1400</span></span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>df_warning <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc_warning,</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>                             <span class="at">time.rnd =</span> <span class="dv">3</span>)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc_warning, time.rnd = 3): The following</span></span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; USUBJID(s) have at least one duplicate event: ABC102-01-001</span></span></code></pre></div>
+<p>What if you have a long column names? This warning informs you some
+column names are longer than 8 characters. This will prevent you from
+converting the dataset to a .xpt file if desired.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>dm_warning <span class="ot">&lt;-</span> dm <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">ETHNICITY =</span> ETHNIC)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>df_warning <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, <span class="at">sl.cov =</span> dm_warning)</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc, sl.cov = dm_warning): The following column</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; name(s) are longer than 8 characters: NETHNICITY, NETHNICITYC</span></span></code></pre></div>
+<p>What if your baseline covariates and time-varying covariates are not
+equivalent at baseline? In theory, all baseline covariates and
+time-varying covarites should agree at <code>NTFD == 0</code>.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>lb_warning <span class="ot">&lt;-</span> lb</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>lb_warning<span class="sc">$</span>ALT[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">31</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>df_warning <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc, <span class="at">sl.cov =</span> lb_warning, <span class="at">tv.cov =</span> talt)</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc, sl.cov = lb_warning, tv.cov = talt): The</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; following USUBJID(s) have at least one event with missing ATFD: ABC102-01-005</span></span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc, sl.cov = lb_warning, tv.cov = talt): BALT and</span></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; TALT are not equivalent at first dose (baseline).</span></span></code></pre></div>
+</div>
+</div>
+<div id="time-imputations" class="section level2">
+<h2>Time imputations</h2>
+<p>Some of our errors and warnings discuss problems with date/time
+elements of <code>ex</code> and <code>pc</code>. What do you do when you
+have an event, but the date/time information is missing?
+<code>pk_build</code> provides two methods for imputing missing
+times:</p>
+<ul>
+<li>Method 1: imputes the nominal time as the actual time. This method
+is good for simple imputations or for pre-clinical records when
+date-time was never collected.<br />
+</li>
+<li>Method 2: imputes an estimate of <code>ATFD</code> relative to other
+events occurring at the same visit. This method is good for phase
+I/II/III trials</li>
+</ul>
+<p>Let’s experiment with these two methods. First, we will drop some
+date-times from <code>pc</code> and replace them with
+<code>NA</code>.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>pc_impute <span class="ot">&lt;-</span> pc</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>pc_impute<span class="sc">$</span>PCDTC[<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">39</span>, <span class="dv">73</span>, <span class="dv">128</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>df_impute <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc_impute,</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">time.rnd =</span> <span class="dv">3</span>)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc_impute, time.rnd = 3): The following</span></span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; USUBJID(s) have at least one event with missing ATFD: ABC102-01-001,</span></span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ABC102-01-002, ABC102-01-004, ABC102-02-002</span></span></code></pre></div>
+<p>This triggers the warning for missing <code>ATFD</code> as expected.
+Now, let’s try impute method 1.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>df_impute_1 <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc_impute,</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">time.rnd =</span> <span class="dv">3</span>, <span class="at">impute =</span> <span class="dv">1</span>)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex, pc_impute, time.rnd = 3, impute = 1): The</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; following USUBJID(s) have at least one event that occurred out of protocol</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; order (NTFD is not strictly increasing): ABC102-01-004</span></span></code></pre></div>
+<p>First, notice we have a new warning. We’ll come back to that later.
+You should also notice that all events have times and the time warning
+disappeared. The imputation is notated with the <code>IMPEX</code> and
+<code>IMPDV</code> columns.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(df_impute_1[<span class="fu">is.na</span>(df_impute_1<span class="sc">$</span>ATFD),]) <span class="co">#number of rows with missing ATFD</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>imputed_events_1 <span class="ot">&lt;-</span> df_impute_1 <span class="sc">%&gt;%</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(IMPDV<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> IMPEX<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<p><code>IMPDV</code> will flag observation records with an imputed
+time. <code>IMPEX</code> will flag all records impacted by an imputed
+dose. You’ll notice we still have a warning for one subject. Let’s find
+out why.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>times_check_1 <span class="ot">&lt;-</span> df_impute_1 <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(USUBJID<span class="sc">==</span><span class="st">&quot;ABC102-01-004&quot;</span>)</span></code></pre></div>
+<p>Notice row 12 has an imputed time <code>ATFD = 14.042</code>. That is
+because <code>NTFD = 14.042</code> for that record. However, the dose
+for this visit was administered a few days late, at time
+<code>ATFD = 16.053</code>. This imputation puts the post-dose sample
+two days ahead of the dose. Impute method 1 a poor assumption for this
+missing date.</p>
+<p>Let’s try method 2 to see if that assumption is better. Method 2
+takes the late dose into account by estimating the time of the sample
+relative to the other events that day.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>df_impute_2 <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex, pc_impute,</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">time.rnd =</span> <span class="dv">3</span>, <span class="at">impute =</span> <span class="dv">2</span>)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>imputed_events_2 <span class="ot">&lt;-</span> df_impute_2 <span class="sc">%&gt;%</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(IMPDV<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> IMPEX<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<p>You’ll notice the warning disappears. Let’s check that subject
+again.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>times_check_2 <span class="ot">&lt;-</span> df_impute_2 <span class="sc">%&gt;%</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(USUBJID<span class="sc">==</span><span class="st">&quot;ABC102-01-004&quot;</span>)</span></code></pre></div>
+<p>You’ll notice that under this method, when
+<code>NTFD = 14.042</code>, <code>ATFD = 16.094</code>. Why?</p>
+<ul>
+<li>Method 2 will compare the NTFD of the record with missing time to
+the NTFD of the most recent dose or post-dose observation with a known
+date/time.</li>
+<li>ATFD for the missing event is estimated as the ATFD of the most
+recent dose + the difference between their NTFD.</li>
+<li>For example, the most recent dose occurs at <code>NTFD = 14</code>,
+<code>ATFD = 16.053</code></li>
+<li>For the imputation at <code>NTFD = 14.042</code>,
+<code>ATFD = 16.053 + (14.042 - 14) = 16.094</code> (the number may
+round a thousandth of a day off)</li>
+<li>This is why method 2 is the better method for large studies, phase
+II/III</li>
+</ul>
+<p>What if we are missing a date/time for a dose event? Let’s repeat the
+experiment.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>ex_impute <span class="ot">&lt;-</span> ex</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>ex_impute<span class="sc">$</span>EXSTDTC[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>df_impute <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_impute, pc, <span class="co">#no imputation method</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">time.rnd =</span> <span class="dv">3</span>)</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex_impute, pc, time.rnd = 3): The following</span></span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; USUBJID(s) have at least one event with missing ATFD: ABC102-01-001</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>df_impute_1 <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_impute, pc, <span class="co">#imputation method 1</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">time.rnd =</span> <span class="dv">3</span>, <span class="at">impute =</span> <span class="dv">1</span>)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex_impute, pc, time.rnd = 3, impute = 1): The</span></span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; following USUBJID(s) have at least one event that occurred out of protocol</span></span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; order (NTFD is not strictly increasing): ABC102-01-001</span></span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>imputed_events_1 <span class="ot">&lt;-</span> df_impute_1 <span class="sc">%&gt;%</span> <span class="co">#imputed records</span></span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(IMPDV<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> IMPEX<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Now, a lot of records for subject 1 have <code>IMPEX == 1</code>.
+This is because all of these observations are associated with a dose
+with an imputed time. Is method 1 a good assumption?</p>
+<ul>
+<li>Imputation method 1 assigns the dose time as
+<code>ATFD = NTFD = 14</code>.</li>
+<li>However, the PK observation times start around
+<code>ATFD = 12.9</code>.</li>
+<li>Because the dose event is out of order, the <code>ATLD</code> is
+calculated incorrectly.</li>
+<li>This assumption places the dose too late and is a poor
+assumption.</li>
+</ul>
+<p>Let’s try method 2 to see the difference. You’ll notice the events
+are in the correct order and times are imputed successfully.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>df_impute_2 <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_impute, pc,</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">time.rnd =</span> <span class="dv">3</span>, <span class="at">impute =</span> <span class="dv">2</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>imputed_events_2 <span class="ot">&lt;-</span> df_impute_2 <span class="sc">%&gt;%</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(IMPDV<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> IMPEX<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<p>What if the first dose is missing instead of the second dose? Let’s
+repeat the experiment, this time with method 2 only since we can assume
+method 1 won’t work well in this scenario.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>ex_impute <span class="ot">&lt;-</span> ex</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>ex_impute<span class="sc">$</span>EXSTDTC[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>df_impute <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_impute, pc, <span class="co"># No imputation method, expect a warning</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">time.rnd =</span> <span class="dv">3</span>)</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex_impute, pc, time.rnd = 3): The following</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; USUBJID(s) have at least one event with missing ATFD: ABC102-01-001</span></span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>df_impute_2 <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(ex_impute, pc, <span class="co">#imputation method 2</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">time.rnd =</span> <span class="dv">3</span>, <span class="at">impute =</span> <span class="dv">2</span>)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>imputed_events_2 <span class="ot">&lt;-</span> df_impute_2 <span class="sc">%&gt;%</span> <span class="co">#imputed events</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(IMPDV<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> IMPEX<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> IMPFEX<span class="sc">==</span><span class="dv">1</span>)</span></code></pre></div>
+<p>Notice an extra column was created, <code>IMPFEX.</code></p>
+<ul>
+<li><code>IMPFEX</code>: imputed time of first dose.</li>
+<li>It is only activated when a first dose has an imputed time.</li>
+<li>It is applied to all records within a subject.</li>
+<li><code>IMPEX</code> will only apply to all records until the next
+dose with a known date-time.</li>
+</ul>
+<p>One final experiment - what if we are missing date-times from
+<code>ex</code> and <code>pc</code>? Note all times are imputed
+successfully and all warnings disappear.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>ex_impute <span class="ot">&lt;-</span> ex</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>ex_impute<span class="sc">$</span>EXSTDTC[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a>df_impute <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(<span class="at">ex =</span> ex_impute, <span class="at">pc =</span> pc_impute, <span class="co">#no impuation method</span></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">time.rnd =</span> <span class="dv">3</span>)</span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_build(ex = ex_impute, pc = pc_impute, time.rnd = 3): The</span></span>
+<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; following USUBJID(s) have at least one event with missing ATFD: ABC102-01-001,</span></span>
+<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ABC102-01-002, ABC102-01-004, ABC102-02-002</span></span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>df_impute_2 <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_build</span>(<span class="at">ex =</span> ex_impute, <span class="at">pc =</span> pc_impute, <span class="co">#imputation method 2</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">time.rnd =</span> <span class="dv">3</span>, <span class="at">impute =</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+<div id="dataset-combination" class="section level2">
+<h2>Dataset combination</h2>
+<p>What if we have multiple studies we want to analyze at once? We could
+create one large <code>ex</code>, <code>pc</code>, etc. input with each
+study, or we could use <code>apmx::pk_combine()</code> to combine two
+datasets built by <code>pk_build()</code>.</p>
+<p>Let’s create a copy of <code>df_full</code> and change it slightly.
+We’ll pretend it’s built from a second study, ABC103.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>df_full2 <span class="ot">&lt;-</span> df_full <span class="sc">%&gt;%</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(DOMAIN<span class="sc">!=</span><span class="st">&quot;PD&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#remove glucose observations</span></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(ID<span class="sc">&lt;</span><span class="dv">19</span>) <span class="sc">%&gt;%</span> <span class="co">#remove subject 19</span></span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">group_by</span>(ID) <span class="sc">%&gt;%</span></span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">NSTUDYC =</span> <span class="st">&quot;ABC103&quot;</span>, <span class="co">#update study ID</span></span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>                <span class="at">USUBJID =</span> <span class="fu">gsub</span>(<span class="st">&quot;ABC102&quot;</span>, <span class="st">&quot;ABC103&quot;</span>, USUBJID),</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">BAGE =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">45</span>, <span class="dv">10</span>)), <span class="co">#re-create all continuous covariates</span></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>                <span class="at">BALB =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="fl">0.5</span>), <span class="dv">1</span>),</span>
+<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a>                <span class="at">BALT =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">30</span>, <span class="dv">5</span>)),</span>
+<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a>                <span class="at">BAST =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">33</span>, <span class="dv">5</span>)),</span>
+<span id="cb62-11"><a href="#cb62-11" aria-hidden="true" tabindex="-1"></a>                <span class="at">BBILI =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="fl">0.7</span>, <span class="fl">0.2</span>), <span class="dv">3</span>),</span>
+<span id="cb62-12"><a href="#cb62-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">BCREAT =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="fl">0.85</span>, <span class="fl">0.2</span>), <span class="dv">3</span>),</span>
+<span id="cb62-13"><a href="#cb62-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">TAST =</span> <span class="fu">ifelse</span>(NTFD<span class="sc">==</span><span class="dv">0</span>, BAST, <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">33</span>, <span class="dv">5</span>))),</span>
+<span id="cb62-14"><a href="#cb62-14" aria-hidden="true" tabindex="-1"></a>                <span class="at">TALT =</span> <span class="fu">ifelse</span>(NTFD<span class="sc">==</span><span class="dv">0</span>, BALT, <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="dv">30</span>, <span class="dv">5</span>)))) <span class="sc">%&gt;%</span></span>
+<span id="cb62-15"><a href="#cb62-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">ungroup</span>()</span></code></pre></div>
+<p>Now, we can combine these two studies together.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>df_combine <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_combine</span>(df_full, df_full2)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_combine(df_full, df_full2): Datasets have different number</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; of DVIDs.</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in apmx::pk_combine(df_full, df_full2): CMT = 3 not included in df2</span></span></code></pre></div>
+<p>You’ll notice we have a few more warnings issued with this function.
+That is because our <code>DVID</code> assignments are different.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_full<span class="sc">$</span>DVID)</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1]  2  1 NA</span></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(df_full2<span class="sc">$</span>DVID)</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1]  1 NA</span></span></code></pre></div>
+<p>If you forgot to add pd events for study 2, this warning will remind
+you. For thits tutorial, we will continue to exclude them.</p>
+<p>Once we are done creating our dataset, we can read it out with the
+function <code>apmx::pk_write()</code>. This ensures the dataset is read
+out in a NONMEM-usable format.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">&quot;PK_ABC101_V01.csv&quot;</span></span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>apmx<span class="sc">::</span><span class="fu">pk_write</span>(df_combine, <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), name))</span></code></pre></div>
+</div>
+<div id="dataset-documentation" class="section level2">
+<h2>Dataset documentation</h2>
+<p>Documenting a dataset is important when working with a team and when
+sharing work with outside organizations or regulatory agencies. For
+example, the FDA requires all population pharmacometric analysis
+datasets be accompanied with a definition file. <code>apmx</code>
+provides tools to help you document your dataset.</p>
+<p>We will start by exploring the definition file feature. The
+definition file sources variable names from a dataframe of definitions
+created with <code>apmx::variable_list_create()</code>. It comes
+pre-filled with definitions for standard apmx variables, and gives you
+the ability to add your own for covariates and other custom variables.
+NOTE you do not have to add prefixes and suffixes to this list, just the
+root term of each covariate (<code>SEX</code> instead of
+<code>NSEX</code> and <code>NSEXC</code>).</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>vl <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">variable_list_create</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">&quot;SEX&quot;</span>, <span class="st">&quot;RACE&quot;</span>, <span class="st">&quot;ETHNIC&quot;</span>, <span class="st">&quot;AGE&quot;</span>,</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>                                              <span class="st">&quot;ALB&quot;</span>, <span class="st">&quot;ALT&quot;</span>, <span class="st">&quot;AST&quot;</span>, <span class="st">&quot;BILI&quot;</span>, <span class="st">&quot;CREAT&quot;</span>),</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">categorization =</span> <span class="fu">rep</span>(<span class="st">&quot;Covariate&quot;</span>, <span class="dv">9</span>),</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">description =</span> <span class="fu">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;race&quot;</span>, <span class="st">&quot;ethnicity&quot;</span>, <span class="st">&quot;age&quot;</span>,</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;albumin&quot;</span>, <span class="st">&quot;alanine aminotransferase&quot;</span>,</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;aspartate aminotransferase&quot;</span>,</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">&quot;total bilirubin&quot;</span>, <span class="st">&quot;serum creatinine&quot;</span>))</span></code></pre></div>
+<p>Now, let’s create the definition file.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>define <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_define</span>(<span class="at">df =</span> df_combine,</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">variable.list=</span>vl)</span></code></pre></div>
+<p>You can export the definition file to a word document using the
+<code>file</code> argument. The <code>project</code> and
+<code>data</code> parameters can be used to add a custom project name
+and dataset name to the header of the document. To use this feature, you
+must use a Word document template with the words “Project” and “Dataset”
+in the header. You can provide the template of the Word document with
+the <code>template</code> parameter.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>define <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_define</span>(<span class="at">df =</span> df_combine,</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">file =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;definition_file.docx&quot;</span>),</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">variable.list=</span>vl,</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">project =</span> <span class="st">&quot;Sponsor Name&quot;</span>,</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">data =</span> <span class="st">&quot;Dataset Name&quot;</span>)</span></code></pre></div>
+<p>Next, let’s create a version log. Version logs are important when we
+have multiple datasets over a project duration. Datasets can be updated
+for all sorts of reasons:</p>
+<ul>
+<li>Additional covariates added or removed</li>
+<li>Additional studies, subjects or events added</li>
+<li>Errors are corrected</li>
+</ul>
+<p>Similar to the definition function, we can provide a template for
+formatting. You can also provide a comment to describe the source data.
+The version log is easiest to use when you read it out as a word
+document using the <code>file</code> parameter.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>vrlg <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">version_log</span>(<span class="at">df =</span> df_combine,</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">name =</span> name,</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">file =</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;version_log.docx&quot;</span>),</span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">src_data =</span> <span class="st">&quot;original test data&quot;</span>)</span></code></pre></div>
+<p>Open the version log document and take a look around. Notice that
+there is a column called “Comments”. You can add a comment there in the
+Word document, and the function will not overwrite it. When you produce
+a new dataset, call <code>apmx::version_log()</code> again with the new
+dataset, the most recent dataset, the new dataset name, and the same
+filepath as the previous log. You will need to use <code>comp_var</code>
+to group the rows for comparison. For PKPD datasets, we recommend
+grouping by <code>USUBJID</code>, <code>ATFD</code>, <code>EVID</code>,
+and <code>DVID</code>. This function will update the version log by
+adding a new row to the Word document.</p>
+<p>Lastly, <code>apmx</code> can help you produce summary tables of your
+datasets. <code>apmx::pk_summarize()</code> produces three types of
+summary tables:</p>
+<ul>
+<li>BLQ summary</li>
+<li>categorical covariate summary</li>
+<li>continuous covariate summary</li>
+</ul>
+<p>Tables can be stratified by any other categorical covariate in the
+dataset.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>sum1 <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_summarize</span>(<span class="at">df =</span> df_combine)</span></code></pre></div>
+<p>The summary function has other parameters to help you document the
+dataset:</p>
+<ul>
+<li><code>strat.by</code> will stratify the dataset by any
+variable.</li>
+<li><code>ignore.C</code> will remove all C-flagged records from the
+analysis.</li>
+<li>This parameter is on by default.</li>
+<li><code>docx</code> will produce word document versions of the summary
+tables</li>
+<li><code>pptx</code> will produce powerpoint slides of the summary
+tables. NOTE: pptx feature is still under development<br />
+</li>
+<li><code>ignore.request</code> will filter out an expression passed
+through this parameter.</li>
+</ul>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>sum2 <span class="ot">&lt;-</span> apmx<span class="sc">::</span><span class="fu">pk_summarize</span>(<span class="at">df =</span> df_combine,</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">strat.by =</span> <span class="fu">c</span>(<span class="st">&quot;NSTUDYC&quot;</span>, <span class="st">&quot;NSEXC&quot;</span>),</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">ignore.request =</span> <span class="st">&quot;NRACE == 2&quot;</span>)</span></code></pre></div>
+</div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
